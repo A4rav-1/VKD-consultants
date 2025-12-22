@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VKD Consultants</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --navy: #052438;
+            --white: #ffffff;
+            --accent: #c5a059;
+            --soft-gray: #f4f7f9;
+            --overlay: rgba(5, 36, 56, 0.70);
+            --nav-glow: 0 4px 25px rgba(255, 255, 255, 0.2);
+        }
+
+        html {
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            scrollbar-width: none;
+        }
+
+        html::-webkit-scrollbar {
+            display: none;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: var(--white);
+            color: var(--navy);
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        .nav-link {
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        /* --- NAV BAR --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 100px;
+            background: var(--navy);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            box-sizing: border-box;
+            box-shadow: var(--nav-glow);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .logo-container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 80px;
+            width: auto;
+            display: block;
+            object-fit: contain;
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover,
+        .navbar a.active {
+            opacity: 1;
+            color: var(--accent);
+        }
+
+        /* --- BACK TO TOP (PC ONLY) --- */
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 100px;
+            background: var(--accent);
+            color: var(--navy);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.4s;
+            z-index: 2000;
+            border: none;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* --- SIDEBAR --- */
+        .side-nav-container {
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            width: 16px;
+            background: rgba(5, 36, 56, 0.1);
+            z-index: 2000;
+            transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .side-nav-container:hover {
+            width: 90px;
+            background: var(--navy) !important;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.4);
+        }
+
+        #progressBar {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 0%;
+            background: var(--accent);
+            z-index: -1;
+            transition: height 0.1s linear;
+        }
+
+        .icon-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .checkpoint {
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .side-nav-container:hover .checkpoint {
+            opacity: 0.5;
+            visibility: visible;
+        }
+
+        .checkpoint.active,
+        .checkpoint:hover {
+            opacity: 1 !important;
+            transform: scale(1.2);
+        }
+
+        .checkpoint svg {
+            width: 26px;
+            height: 26px;
+            fill: var(--white);
+            pointer-events: none;
+        }
+
+        /* --- SECTIONS --- */
+        section {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            scroll-snap-align: start;
+            padding: 0 10%;
+            box-sizing: border-box;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reveal-content {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        section.active .reveal-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HOME --- */
+        #home {
+            background: linear-gradient(var(--overlay), var(--overlay)), url(Group\ 4.png);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--white);
+        }
+
+        .hero-text h1 {
+            font-size: clamp(3rem, 8vw, 5rem);
+            line-height: 1.1;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .hero-text p {
+            font-size: 1.5rem;
+            max-width: 950px;
+            margin: 0 auto 50px;
+            font-weight: 300;
+            line-height: 1.7;
+            opacity: 0.95;
+        }
+
+        /* --- DARK SECTION --- */
+        .dark-sec {
+            background: linear-gradient(180deg, #052438 0%, #0a3250 100%);
+            color: var(--white);
+        }
+
+        /* --- SERVICES --- */
+        #services {
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            background-image: radial-gradient(var(--accent) 0.5px, transparent 0.5px);
+            background-size: 40px 40px;
+        }
+
+        /* --- CONTACT --- */
+        #contact {
+            background-color: var(--white);
+            background-image: linear-gradient(90deg, var(--soft-gray) 1px, transparent 1px), linear-gradient(var(--soft-gray) 1px, transparent 1px);
+            background-size: 80px 80px;
+        }
+
+        .contact-card {
+            background: var(--white);
+            border-left: 5px solid var(--accent);
+            padding: 80px;
+            box-shadow: 0 30px 100px rgba(5, 36, 56, 0.08);
+            text-align: center;
+            max-width: 900px;
+            width: 100%;
+            position: relative;
+        }
+
+        .contact-card::after {
+            content: "";
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px;
+            height: 100px;
+            border-top: 1px solid var(--accent);
+            border-right: 1px solid var(--accent);
+            opacity: 0.3;
+        }
+
+        /* --- GRID & LAYOUTS --- */
+        .centered-layout {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            margin-bottom: 70px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .services-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            width: 100%;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .service-card {
+            background: var(--white);
+            border: 1px solid rgba(5, 36, 56, 0.08);
+            padding: 50px 35px;
+            width: 350px;
+            transition: 0.5s;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.04);
+        }
+
+        .service-card:hover {
+            transform: translateY(-15px);
+            border-color: var(--accent);
+            box-shadow: 0 30px 70px rgba(197, 160, 89, 0.15);
+        }
+
+        .service-card h3 {
+            color: var(--accent);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: var(--navy);
+        }
+
+        .split-layout {
+            display: flex;
+            gap: 100px;
+            align-items: center;
+        }
+
+        .split-text h2 {
+            color: var(--accent);
+            font-size: 2.8rem;
+            margin-bottom: 30px;
+        }
+
+        .split-text p {
+            font-size: 1.2rem;
+            line-height: 1.9;
+            margin-bottom: 25px;
+        }
+
+        .split-mission blockquote {
+            font-size: 1.8rem;
+            color: var(--accent);
+            font-style: italic;
+            line-height: 1.6;
+            border-left: 2px solid var(--accent);
+            padding-left: 30px;
+        }
+
+        .cta-gold {
+            display: inline-block;
+            padding: 22px 65px;
+            background: transparent;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 5px;
+            transition: 0.4s;
+            text-transform: uppercase;
+            margin-top: 40px;
+        }
+
+        .cta-gold:hover {
+            background: var(--accent);
+            color: var(--navy);
+            box-shadow: 0 20px 40px rgba(197, 160, 89, 0.3);
+            transform: scale(1.05);
+        }
+
+        /* --- FOOTER & SOCIALS --- */
+        .footer-wrapper {
+            scroll-snap-align: end;
+            background: var(--navy);
+            padding: 60px 0;
+            text-align: center;
+            color: var(--white);
+            border-top: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .social-links a {
+            display: block;
+            width: 30px;
+            height: 30px;
+            transition: 0.3s;
+        }
+
+        .social-links svg {
+            width: 100%;
+            height: 100%;
+            fill: var(--accent);
+            opacity: 0.8;
+        }
+
+        .social-links a:hover svg {
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+
+        /* --- MOBILE TOGGLE --- */
+        .mobile-toggle {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .mobile-toggle span {
+            width: 30px;
+            height: 2px;
+            background: var(--white);
+            transition: 0.3s;
+        }
+
+        @media (max-width: 991px) {
+            html {
+                scroll-snap-type: none;
+            }
+
+            section {
+                height: auto;
+                min-height: 100vh;
+                padding: 120px 5%;
+            }
+
+            #backToTop {
+                display: none;
+            }
+
+            .navbar {
+                height: 80px;
+            }
+
+            .mobile-toggle {
+                display: flex;
+                z-index: 1001;
+            }
+
+            .navbar ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                height: 100vh;
+                background: var(--navy);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.5s;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            }
+
+            .navbar ul.open {
+                right: 0;
+            }
+
+            .side-nav-container {
+                display: none;
+            }
+
+            .split-layout {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+
+            .split-mission blockquote {
+                border-left: none;
+                border-top: 2px solid var(--accent);
+                padding: 30px 0;
+            }
+
+            .service-card {
+                width: 100%;
+            }
+
+            .contact-card {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="backToTop"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <path d="M18 15l-6-6-6 6" />
+        </svg></button>
+
+    <div class="side-nav-container" id="sideNav">
+        <div id="progressBar"></div>
+        <div class="icon-wrapper">
+            <button class="checkpoint" data-target="home"><svg viewBox="0 0 24 24">
+                    <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
+                </svg></button>
+            <button class="checkpoint" data-target="about"><svg viewBox="0 0 24 24">
+                    <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3z" />
+                </svg></button>
+            <button class="checkpoint" data-target="services"><svg viewBox="0 0 24 24">
+                    <path
+                        d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.9-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2z" />
+                </svg></button>
+            <button class="checkpoint" data-target="whyus"><svg viewBox="0 0 24 24">
+                    <path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z" />
+                </svg></button>
+            <button class="checkpoint" data-target="contact"><svg viewBox="0 0 24 24">
+                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z" />
+                </svg></button>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo-container"><img src="IMG-20251105-WA0027.jpg" alt="VKD Consultants" class="logo-img"></div>
+        <div class="mobile-toggle" id="mobileMenuBtn"><span></span><span></span><span></span></div>
+        <ul id="navLinks">
+            <li><a href="#home" class="nav-link">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#services" class="nav-link">Services</a></li>
+            <li><a href="#whyus" class="nav-link">Why Us</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="home">
+            <div class="reveal-content centered-layout hero-text">
+                <h1>Precision Bookkeeping<br><span style="color: var(--accent);">Built On Excellence</span></h1>
+                <p>Running a business is demanding — your books shouldn’t be. We provide reliable, transparent, and
+                    efficient bookkeeping services so you can focus on growing your business.</p>
+                <a href="#contact" class="cta-gold">Get Started</a>
+            </div>
+        </section>
+
+        <section id="about" class="dark-sec">
+            <div class="reveal-content">
+                <div class="split-layout">
+                    <div class="split-text">
+                        <h2>Precision & Clarity</h2>
+                        <p>At VKD Consultants, we provide a level of bookkeeping precision designed for business owners
+                            who expect excellence. Our service is built on discretion, accuracy, and a deep commitment
+                            to financial clarity.</p>
+                        <p>We combine refined processes with personalised attention, ensuring your accounts are
+                            meticulously maintained and delivered with sophistication.</p>
+                    </div>
+                    <div class="split-mission">
+                        <blockquote style="border: none;">"To offer an elite bookkeeping experience that empowers
+                            business leaders with confidence, clarity, and complete peace of mind."</blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <div class="reveal-content centered-layout">
+                <h2 class="section-title">What We Do</h2>
+                <div class="services-row">
+                    <div class="service-card">
+                        <h3>Bookkeeping</h3>
+                        <p>Monthly bookkeeping & reconciliations.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Compliance</h3>
+                        <p>BAS & GST preparation.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Reporting</h3>
+                        <p>Financial reporting & cashflow insights.</p>
+                    </div>
+                </div>
+                <div class="services-row">
+                    <div class="service-card">
+                        <h3>Payables</h3>
+                        <p>Full management of your accounts payable.</p>
+                    </div>
+                    <div class="service-card">
+                        <h3>Receivables</h3>
+                        <p>Full management of your accounts receivable.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="whyus" class="dark-sec">
+            <div class="reveal-content centered-layout">
+                <h2 class="section-title" style="color: var(--white);">Why Choose Us</h2>
+                <div class="services-row">
+                    <div class="service-card" style="background: rgba(255,255,255,0.03);">
+                        <h3 style="color: var(--accent);">Communication</h3>
+                        <p style="color: var(--white);">Clear, simple communication.</p>
+                    </div>
+                    <div class="service-card" style="background: rgba(255,255,255,0.03);">
+                        <h3 style="color: var(--accent);">Efficiency</h3>
+                        <p style="color: var(--white);">Fast turnaround times.</p>
+                    </div>
+                    <div class="service-card" style="background: rgba(255,255,255,0.03);">
+                        <h3 style="color: var(--accent);">Reliability</h3>
+                        <p style="color: var(--white);">Accurate records you can trust.</p>
+                    </div>
+                    <div class="service-card" style="background: rgba(255,255,255,0.03);">
+                        <h3 style="color: var(--accent);">Tailored</h3>
+                        <p style="color: var(--white);">Solutions for SME businesses.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <div class="reveal-content centered-layout">
+                <div class="contact-card">
+                    <h1 style="font-size: 3.5rem; color: var(--navy); margin-bottom: 20px;">Feel Confident.</h1>
+                    <p
+                        style="font-size: 1.5rem; color: var(--accent); font-family: 'Cinzel'; margin-bottom: 40px; letter-spacing: 2px;">
+                        Your Financial Clarity Starts Here.</p>
+                    <p
+                        style="font-weight: 300; line-height: 1.8; color: var(--navy); opacity: 0.8; margin-bottom: 50px; font-size: 1.1rem;">
+                        Ready to elevate your business performance? Reach out today to start a partnership built on
+                        excellence, discretion, and accuracy.</p>
+                    <a href="mailto:info@vkdconsultants.com" class="cta-gold" style="color: var(--navy);">Enquire
+                        Now</a>
+                </div>
+            </div>
+        </section>
+
+        <footer class="footer-wrapper">
+            <img src="IMG-20251105-WA0027.jpg" alt="VKD Consultants"
+                style="height: 50px; margin-bottom: 20px; opacity: 0.8;">
+
+            <div class="social-links">
+                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                </a>
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+                    <svg viewBox="0 0 24 24">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849s-.011 3.584-.069 4.849c-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.849-.07c-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849s.012-3.584.07-4.849c.149-3.225 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948s.014 3.667.072 4.947c.2 4.337 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072s3.667-.014 4.947-.072c4.335-.2 6.78-2.618 6.98-6.98.058-1.28.072-1.689.072-4.947s-.014-3.667-.072-4.947c-.2-4.349-2.619-6.78-6.98-6.98-1.281-.058-1.689-.072-4.948-.072zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>
+                </a>
+            </div>
+
+            <p style="font-size: 0.8rem; opacity: 0.5; letter-spacing: 2px;">© 2024 VKD CONSULTANTS. ALL RIGHTS
+                RESERVED.</p>
+        </footer>
+    </main>
+
+    <script>
+        const progressBar = document.getElementById('progressBar');
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const checkpoints = document.querySelectorAll('.checkpoint');
+        const backToTop = document.getElementById('backToTop');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinksWrapper = document.getElementById('navLinks');
+
+        mobileMenuBtn.addEventListener('click', () => { navLinksWrapper.classList.toggle('open'); });
+        navLinks.forEach(link => { link.addEventListener('click', () => { navLinksWrapper.classList.remove('open'); }); });
+
+        window.addEventListener('scroll', () => {
+            const progress = (window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+            progressBar.style.height = `${progress}%`;
+            if (window.pageYOffset > 400) backToTop.classList.add('show');
+            else backToTop.classList.remove('show');
+        });
+
+        backToTop.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
+
+        [...checkpoints, ...navLinks].forEach(el => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = el.getAttribute('href')?.substring(1) || el.getAttribute('data-target');
+                document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    const id = entry.target.getAttribute('id');
+                    navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${id}`));
+                    checkpoints.forEach(cp => cp.classList.toggle('active', cp.getAttribute('data-target') === id));
+                }
+            });
+        }, { threshold: 0.4 });
+
+        sections.forEach(sec => observer.observe(sec));
+    </script>
+</body>
+
+</html>
