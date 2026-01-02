@@ -7,14 +7,17 @@
     <title>VKD Consultants | Elite Bookkeeping</title>
     <meta name="description" content="Financial clarity and elite precision for SME businesses.">
 
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&display=swap"
+        rel="stylesheet">
 
     <style>
         :root {
             --navy: #052438;
             --deep-navy: #02121d;
             --white: #ffffff;
-            --accent: #c5a059; /* Gold */
+            --accent: #c5a059;
+            /* Gold */
             --soft-gray: #f4f7f9;
         }
 
@@ -25,10 +28,10 @@
             scrollbar-width: thin;
             scrollbar-color: var(--accent) var(--navy);
             overflow-x: hidden;
-            
+
             /* DESKTOP: Strong, deliberate snap */
-            scroll-snap-type: y mandatory; 
-            
+            scroll-snap-type: y mandatory;
+
             height: 100vh;
             overflow-y: auto;
         }
@@ -42,7 +45,11 @@
         }
 
         /* --- TYPOGRAPHY --- */
-        h1, h2, h3, .nav-link, .cinzel {
+        h1,
+        h2,
+        h3,
+        .nav-link,
+        .cinzel {
             font-family: 'Cinzel', serif;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -62,7 +69,7 @@
             overflow: hidden;
 
             /* SNAP ALIGNMENT */
-            scroll-snap-align: start; 
+            scroll-snap-align: start;
             scroll-snap-stop: always;
         }
 
@@ -77,7 +84,8 @@
             pointer-events: none;
         }
 
-        .reveal-content, .hero-content {
+        .reveal-content,
+        .hero-content {
             z-index: 2;
             position: relative;
             opacity: 0;
@@ -95,45 +103,127 @@
         /* --- PRELOADER --- */
         #preloader {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: var(--navy);
             z-index: 9999;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             transition: opacity 0.8s ease, visibility 0.8s;
         }
-        .loader-logo { width: 140px; margin-bottom: 25px; animation: pulse 2s infinite ease-in-out; }
-        .loader-bar { width: 120px; height: 1px; background: rgba(197, 160, 89, 0.2); position: relative; overflow: hidden; }
-        .loader-bar::after { content: ''; position: absolute; left: -100%; width: 100%; height: 100%; background: var(--accent); animation: load 1.5s infinite; }
-        @keyframes pulse { 0%, 100% { opacity: 0.6; transform: scale(0.98); } 50% { opacity: 1; transform: scale(1); } }
-        @keyframes load { 100% { left: 100%; } }
-        body.loaded #preloader { opacity: 0; visibility: hidden; }
+
+        .loader-logo {
+            width: 140px;
+            margin-bottom: 25px;
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        .loader-bar {
+            width: 120px;
+            height: 1px;
+            background: rgba(197, 160, 89, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .loader-bar::after {
+            content: '';
+            position: absolute;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--accent);
+            animation: load 1.5s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 0.6;
+                transform: scale(0.98);
+            }
+
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes load {
+            100% {
+                left: 100%;
+            }
+        }
+
+        body.loaded #preloader {
+            opacity: 0;
+            visibility: hidden;
+        }
 
         /* --- NAVBAR --- */
         .navbar {
             position: fixed;
-            top: 0; width: 100%; height: 90px;
+            top: 0;
+            width: 100%;
+            height: 90px;
             background: var(--navy);
             z-index: 1000;
-            display: flex; justify-content: space-between; align-items: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 0 7%;
             box-sizing: border-box;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
-        .logo-img { height: 60px; width: auto; z-index: 1001; position: relative; }
-        
-        .navbar ul { display: flex; list-style: none; gap: 2.5rem; margin: 0; padding: 0; }
-        .navbar a { color: var(--white); text-decoration: none; font-size: 0.75rem; font-weight: 600; opacity: 0.6; transition: 0.3s; text-transform: uppercase; letter-spacing: 1px; }
-        .navbar a:hover, .navbar a.active { opacity: 1; color: var(--accent); }
+
+        .logo-img {
+            height: 60px;
+            width: auto;
+            z-index: 1001;
+            position: relative;
+        }
+
+        .navbar ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.75rem;
+            font-weight: 600;
+            opacity: 0.6;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .navbar a:hover,
+        .navbar a.active {
+            opacity: 1;
+            color: var(--accent);
+        }
 
         /* --- MOBILE TOGGLE (HAMBURGER) --- */
         .mobile-toggle {
-            display: none; /* Hidden on desktop */
+            display: none;
+            /* Hidden on desktop */
             flex-direction: column;
             justify-content: space-between;
             width: 30px;
             height: 21px;
             cursor: pointer;
-            z-index: 1002; /* Above the mobile menu */
+            z-index: 1002;
+            /* Above the mobile menu */
         }
 
         .mobile-toggle span {
@@ -150,132 +240,491 @@
             transform: translateY(9px) rotate(45deg);
             background: var(--accent);
         }
+
         .mobile-toggle.open span:nth-child(2) {
             opacity: 0;
         }
+
         .mobile-toggle.open span:nth-child(3) {
             transform: translateY(-10px) rotate(-45deg);
             background: var(--accent);
         }
 
         /* --- HOME --- */
-        #home { color: var(--white); text-align: center; }
+        #home {
+            color: var(--white);
+            text-align: center;
+        }
+
         .hero-bg {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(rgba(5, 36, 56, 0.85), rgba(5, 36, 56, 0.7)), url('hero-office.jpg');
-            background-size: cover; background-position: center;
+            background-size: cover;
+            background-position: center;
             animation: kenBurns 25s infinite alternate ease-in-out;
             z-index: 0;
         }
-        @keyframes kenBurns { from { transform: scale(1); } to { transform: scale(1.15); } }
-        .brand-name { font-size: clamp(3rem, 10vw, 6.5rem); margin: 0; line-height: 1; text-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        .hero-subline { font-size: clamp(0.9rem, 2vw, 1.4rem); margin-top: 20px; opacity: 0.9; letter-spacing: 6px; }
+
+        @keyframes kenBurns {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: scale(1.15);
+            }
+        }
+
+        .brand-name {
+            font-size: clamp(3rem, 10vw, 6.5rem);
+            margin: 0;
+            line-height: 1;
+            text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-subline {
+            font-size: clamp(0.9rem, 2vw, 1.4rem);
+            margin-top: 20px;
+            opacity: 0.9;
+            letter-spacing: 6px;
+        }
 
         /* --- ABOUT --- */
-        #about { background-color: var(--navy); color: var(--white); }
-        .split-layout { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 60px; align-items: center; }
-        .split-text h2 { color: var(--accent); font-size: 2.5rem; margin-bottom: 20px; }
-        .split-mission blockquote { font-size: 1.5rem; color: var(--accent); font-style: italic; border-left: 3px solid var(--accent); padding-left: 30px; margin: 0; line-height: 1.4; }
+        #about {
+            background-color: var(--navy);
+            color: var(--white);
+        }
+
+        .about-centered {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-centered h2 {
+            color: var(--accent);
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+        }
+
+        .about-centered p {
+            font-size: 1.1rem;
+            color: var(--white);
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        .mission-banner {
+            background: rgba(197, 160, 89, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 30px 40px;
+            margin: 50px 0;
+            text-align: center;
+            position: relative;
+        }
+
+
+
+        .mission-banner h3 {
+            color: var(--accent);
+            font-size: 1.4rem;
+            margin-top: 0;
+            margin-bottom: 15px;
+            letter-spacing: 3px;
+        }
+
+        .mission-banner p {
+            font-size: 1.1rem;
+            color: var(--white);
+            font-style: italic;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(197, 160, 89, 0.2);
+        }
+
+        .value-item h4 {
+            color: var(--accent);
+            margin: 0 0 10px 0;
+            font-size: 1rem;
+            font-family: 'Cinzel', serif;
+        }
+
+        .value-item p {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        @media (max-width: 950px) {
+            .values-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
 
         /* --- SERVICES (CONTRAST POP CARDS) --- */
-        #services { background-color: var(--soft-gray); color: var(--navy); }
-        .section-title { font-size: 2.5rem; text-align: center; margin-bottom: 60px; position: relative; }
-        .section-title::after { content: ""; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 50px; height: 2px; background: var(--accent); }
-        
+        #services {
+            background-color: var(--soft-gray);
+            color: var(--navy);
+            padding-left: 1%;
+            /* Maximizing horizontal space */
+            padding-right: 1%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
         .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            justify-content: center;
+            /* Center cards if they fit */
+            gap: 5px;
+            /* Tightest gap to allow max card size */
+            padding-bottom: 20px;
+            /* Space for scrollbar if visible */
+            scrollbar-width: none;
+            /* Hide scrollbar for cleaner look */
+        }
+
+        .services-grid::-webkit-scrollbar {
+            display: none;
         }
 
         .service-card {
             background: rgba(255, 255, 255, 0.7);
-            padding: 50px 40px;
-            border: 1px solid transparent; 
-            transition: all 0.2s ease-out;
+            padding: 40px 15px;
+            /* Compact side padding */
+            border: 1px solid transparent;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
             cursor: pointer;
             position: relative;
+            min-width: 210px;
+            /* Sweet spot: fits 5 on standard screens */
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 220px;
+            /* Keep the height large */
         }
 
-        .service-card h3 { color: var(--navy); font-size: 1rem; margin-bottom: 15px; font-weight: 700; transition: color 0.2s; }
-        .service-card p { color: #777; line-height: 1.6; transition: color 0.2s; }
+        .service-card h3 {
+            color: var(--navy);
+            font-size: 1.15rem;
+            /* Slightly smaller to prevent awkward wrapping */
+            margin: 0;
+            font-weight: 700;
+            transition: all 0.3s;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
 
-        /* HOVER: CONTRAST POP */
-        .service-card:hover {
+        /* Description hidden by default */
+        .service-card p {
+            color: #777;
+            line-height: 1.6;
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            margin-top: 0;
+            transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* Active State (Clicked) */
+        .service-card.active {
             background: #ffffff;
             border-color: var(--accent);
             box-shadow: 0 15px 40px rgba(197, 160, 89, 0.2);
-            transform: none; 
+            justify-content: flex-start;
+            /* Move text to top */
         }
-        .service-card:hover h3 { color: var(--accent); }
-        .service-card:hover p { color: #000; }
+
+        .service-card.active h3 {
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .service-card.active p {
+            max-height: 200px;
+            opacity: 1;
+            color: #000;
+        }
+
+        /* Hover Indication (Plus Icon) */
+        .service-card::after {
+            content: "+";
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            color: var(--navy);
+            opacity: 0.5;
+            transition: 0.3s;
+            line-height: 1;
+        }
+
+        .service-card:hover::after {
+            opacity: 1;
+            color: var(--accent);
+            transform: scale(1.2);
+        }
+
+        .service-card.active::after {
+            content: "−";
+            /* Minus sign */
+            color: var(--accent);
+            opacity: 1;
+            transform: rotate(0deg);
+        }
+
+        /* HOVER: Mild pop */
+        .service-card:hover {
+            background: rgba(255, 255, 255, 0.9);
+            transform: translateY(-5px);
+            border-color: rgba(197, 160, 89, 0.3);
+        }
 
         /* --- WHY US --- */
-        #whyus { background: var(--deep-navy); color: var(--white); }
+        #whyus {
+            background: var(--deep-navy);
+            color: var(--white);
+        }
+
         #whyus .service-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
+
         #whyus .service-card:hover {
-            background: rgba(5, 36, 56, 0.5); 
+            background: rgba(5, 36, 56, 0.5);
             border-color: var(--accent);
         }
-        #whyus .service-card h3, #whyus .service-card p { color: rgba(255,255,255,0.8); }
-        #whyus .service-card:hover h3 { color: var(--accent); }
-        #whyus .service-card:hover p { color: #fff; }
+
+        #whyus .service-card h3,
+        #whyus .service-card p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        #whyus .service-card:hover h3 {
+            color: var(--accent);
+        }
+
+        #whyus .service-card:hover p {
+            color: #fff;
+        }
+
+        #whyus .service-card::after {
+            color: var(--accent);
+            /* Make plus visible on dark bg */
+            opacity: 0.7;
+            /* Always visible but slightly subtle */
+        }
+
+        #whyus .service-card:hover::after,
+        #whyus .service-card.active::after {
+            opacity: 1;
+        }
 
         /* --- CONTACT --- */
-        #contact { background: linear-gradient(to bottom, #ffffff 0%, #f4f7f9 100%); }
+        #contact {
+            background: linear-gradient(to bottom, #ffffff 0%, #f4f7f9 100%);
+        }
+
         .contact-card {
-            background: var(--white); padding: 60px;
+            background: var(--white);
+            padding: 60px;
             box-shadow: 0 40px 100px rgba(0, 0, 0, 0.1);
-            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
-            z-index: 5; border: 1px solid #eee;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            z-index: 5;
+            border: 1px solid #eee;
         }
-        .contact-form { display: flex; flex-direction: column; gap: 15px; }
-        .contact-form input, .contact-form textarea {
-            padding: 15px; border: 1px solid #eee; background: var(--soft-gray);
-            font-family: inherit; width: 100%; box-sizing: border-box; outline: none; transition: 0.3s;
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
-        .contact-form input:focus, .contact-form textarea:focus { border-color: var(--accent); background: #fff; }
-        
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 15px;
+            border: 1px solid #eee;
+            background: var(--soft-gray);
+            font-family: inherit;
+            width: 100%;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent);
+            background: #fff;
+        }
+
         .cta-gold {
-            display: inline-block; padding: 18px 35px;
-            border: 2px solid var(--accent); color: var(--accent);
-            text-transform: uppercase; font-weight: 700; cursor: pointer;
-            transition: 0.3s; text-decoration: none; text-align: center; background: transparent; letter-spacing: 2px; font-size: 0.8rem;
+            display: inline-block;
+            padding: 18px 35px;
+            border: 2px solid var(--accent);
+            color: var(--accent);
+            text-transform: uppercase;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            text-align: center;
+            background: transparent;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
         }
-        .cta-gold:hover { background: var(--accent); color: var(--navy); }
+
+        .cta-gold:hover {
+            background: var(--accent);
+            color: var(--navy);
+        }
 
         /* --- FOOTER --- */
-        footer { background: var(--navy); padding: 40px 0; text-align: center; color: rgba(255, 255, 255, 0.3); font-size: 0.7rem; letter-spacing: 2px; }
+        footer {
+            background: var(--navy);
+            padding: 40px 0;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 0.7rem;
+            letter-spacing: 2px;
+        }
 
         /* --- SIDE NAV --- */
-        .side-nav-container { position: fixed; right: 30px; top: 50%; transform: translateY(-50%); height: 50vh; width: 20px; z-index: 2000; display: flex; flex-direction: column; justify-content: space-between; align-items: center; }
-        .nav-track { position: absolute; top: 0; bottom: 0; left: 50%; transform: translateX(-50%); width: 1px; background: rgba(0,0,0,0.1); z-index: -1; }
-        #progressBar { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 0%; background: var(--accent); z-index: 0; transition: height 0.1s linear; }
-        .checkpoint { width: 8px; height: 8px; background: var(--navy); border: 1px solid transparent; transform: rotate(45deg); cursor: pointer; transition: 0.3s; padding: 0; }
-        .checkpoint.active { background: var(--accent); transform: rotate(45deg) scale(1.4); }
-        .checkpoint:hover { border-color: var(--accent); }
+        .side-nav-container {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 50vh;
+            width: 20px;
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-track {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1px;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: -1;
+        }
+
+        #progressBar {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 0%;
+            background: var(--accent);
+            z-index: 0;
+            transition: height 0.1s linear;
+        }
+
+        .checkpoint {
+            width: 8px;
+            height: 8px;
+            background: var(--navy);
+            border: 1px solid transparent;
+            transform: rotate(45deg);
+            cursor: pointer;
+            transition: 0.3s;
+            padding: 0;
+        }
+
+        .checkpoint.active {
+            background: var(--accent);
+            transform: rotate(45deg) scale(1.4);
+        }
+
+        .checkpoint:hover {
+            border-color: var(--accent);
+        }
 
         /* --- MOBILE STYLES --- */
         @media (max-width: 950px) {
+
             /* 1. Disable Scroll Snap for Smooth Mobile UX */
-            html { scroll-snap-type: none; }
-            section { padding: 100px 5%; }
-            
-            .split-layout, .contact-card { grid-template-columns: 1fr; text-align: center; }
-            .side-nav-container { display: none; }
-            .split-mission blockquote { border-left: none; border-top: 2px solid var(--accent); padding-top: 20px; padding-left: 0; }
+            html {
+                scroll-snap-type: none;
+            }
+
+            section {
+                padding: 100px 5%;
+            }
+
+            .split-layout,
+            .contact-card {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .side-nav-container {
+                display: none;
+            }
+
+            .split-mission blockquote {
+                border-left: none;
+                border-top: 2px solid var(--accent);
+                padding-top: 20px;
+                padding-left: 0;
+            }
 
             /* 2. Show Mobile Toggle */
-            .mobile-toggle { display: flex; }
+            .mobile-toggle {
+                display: flex;
+            }
 
             /* 3. Mobile Menu Overlay Style */
             .navbar ul {
                 position: fixed;
                 top: 0;
-                right: -100%; /* Hidden by default */
+                right: -100%;
+                /* Hidden by default */
                 width: 100%;
                 height: 100vh;
                 background: var(--navy);
@@ -283,7 +732,8 @@
                 justify-content: center;
                 align-items: center;
                 transition: right 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-                z-index: 1000; /* Behind the logo/toggle */
+                z-index: 1000;
+                /* Behind the logo/toggle */
                 gap: 2rem;
             }
 
@@ -296,15 +746,93 @@
                 font-size: 1.2rem;
                 opacity: 0.8;
             }
+
+            /* 5. Mobile Services Stack (Accordion) */
+            .services-grid {
+                flex-direction: column;
+                overflow-x: hidden;
+                /* No scroll */
+                height: auto;
+                padding-bottom: 0;
+            }
+
+            .service-card {
+                width: 100%;
+                /* Full width */
+                min-width: 0;
+                min-height: 80px;
+                /* Smaller collapsed height */
+                padding: 25px;
+                box-sizing: border-box;
+            }
+
+            .service-card h3 {
+                text-align: left;
+                /* Align left for stacked look */
+            }
+
+            .service-card::after {
+                right: 25px;
+                /* Match padding */
+                bottom: auto;
+                top: 50%;
+                transform: translateY(-50%);
+                /* Centered vertically in collapsed state */
+            }
+
+            .service-card.active::after {
+                transform: translateY(-50%) rotate(0deg);
+                /* Keep centered vertically */
+            }
+
+            .service-card.active {
+                justify-content: center;
+                /* Keep text centered/aligned properly */
+            }
         }
-        
+
         /* --- CUSTOM CURSOR --- */
         @media (hover: hover) and (pointer: fine) {
-            .cursor-dot { position: fixed; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); }
-            .cursor-outline { position: fixed; width: 40px; height: 40px; border: 1px solid rgba(197, 160, 89, 0.5); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s, background-color 0.2s; }
-            body.hovering .cursor-outline { width: 60px; height: 60px; background: rgba(197, 160, 89, 0.1); border-color: transparent; }
-            body { cursor: none; }
-            a, button, input, textarea { cursor: none; }
+            .cursor-dot {
+                position: fixed;
+                width: 6px;
+                height: 6px;
+                background: var(--accent);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                transform: translate(-50%, -50%);
+            }
+
+            .cursor-outline {
+                position: fixed;
+                width: 40px;
+                height: 40px;
+                border: 1px solid rgba(197, 160, 89, 0.5);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 9999;
+                transform: translate(-50%, -50%);
+                transition: width 0.2s, height 0.2s, background-color 0.2s;
+            }
+
+            body.hovering .cursor-outline {
+                width: 60px;
+                height: 60px;
+                background: rgba(197, 160, 89, 0.1);
+                border-color: transparent;
+            }
+
+            body {
+                cursor: none;
+            }
+
+            a,
+            button,
+            input,
+            textarea {
+                cursor: none;
+            }
         }
     </style>
 </head>
@@ -331,7 +859,7 @@
 
     <nav class="navbar">
         <img src="IMG-20251105-WA0027.jpg" alt="VKD Consultants" class="logo-img">
-        
+
         <div class="mobile-toggle" id="mobileMenuBtn">
             <span></span>
             <span></span>
@@ -353,7 +881,13 @@
             <canvas id="canvas-home"></canvas>
             <div class="reveal-content hero-content">
                 <h1 class="brand-name">VKD Consultants</h1>
-                <h2 class="hero-subline cinzel">Precision Bookkeeping<br><span style="color: var(--accent);">Built On Excellence</span></h2>
+                <h2 class="hero-subline cinzel">Precision Bookkeeping<br><span style="color: var(--accent);">Built On
+                        Excellence</span></h2>
+                <div class="item1">
+                    <p>Running a business is demanding — your books shouldn’t be. We provide reliable,
+                        transparent, and efficient bookkeeping services so you can focus on what matters
+                        most: growing your business. </p>
+                </div>
                 <a href="#contact" class="cta-gold" style="margin-top: 30px;">Secure Your Partnership</a>
             </div>
         </section>
@@ -361,38 +895,97 @@
         <section id="about">
             <canvas id="canvas-about"></canvas>
             <div class="reveal-content">
-                <div class="split-layout">
-                    <div class="split-text">
-                        <h2>The Standard of Financial Discretion</h2>
-                        <p>We serve visionaries who require more than just balanced ledgers. At VKD Consultants, we provide a sophisticated financial infrastructure designed for scaling businesses and high-net-worth operations.</p>
+                <div class="about-centered">
+                    <h2>The Standard of Financial Discretion</h2>
+                    <p>We serve visionaries who require more than just balanced ledgers. At VKD Consultants, we
+                        provide a sophisticated financial infrastructure designed for scaling businesses and
+                        high-net-worth operations. We combine refined processes with personalised attention, ensuring
+                        your accounts are meticulously maintained and your financial insights are delivered with
+                        sophistication and simplicity.</p>
+                </div>
+
+                <!-- MISSION BANNER -->
+                <div class="mission-banner">
+                    <h3>Our Mission</h3>
+                    <p>To offer an elite bookkeeping experience that empowers business leaders with confidence,
+                        clarity, and complete peace of mind.</p>
+                </div>
+
+                <!-- VALUES GRID -->
+                <div class="values-grid">
+                    <div class="value-item">
+                        <h4>Excellence</h4>
+                        <p>Superior accuracy and a commitment to doing things right the first time.</p>
                     </div>
-                    <div class="split-mission">
-                        <blockquote class="cinzel">"Where precision meets strategy, and numbers become your greatest competitive advantage."</blockquote>
+                    <div class="value-item">
+                        <h4>Integrity</h4>
+                        <p>Transparent, ethical, and confidential at every step.</p>
+                    </div>
+                    <div class="value-item">
+                        <h4>Precision</h4>
+                        <p>Attention to detail that ensures nothing is ever overlooked.</p>
+                    </div>
+                    <div class="value-item">
+                        <h4>Partnership</h4>
+                        <p>A trusted financial ally invested in your long-term success.</p>
                     </div>
                 </div>
+
+                <p
+                    style="text-align: center; margin-top: 40px; font-style: italic; color: var(--accent); font-size: 0.9rem;">
+                    At VKD Consultants, we don’t just manage numbers — we elevate them into meaningful insights that
+                    support smarter decisions and sustained growth.</p>
             </div>
         </section>
 
         <section id="services">
             <canvas id="canvas-services"></canvas>
             <div class="reveal-content">
-                <h2 class="section-title cinzel">Our Capabilities</h2>
+                <h2 class="section-title cinzel">Our Services</h2>
                 <div class="services-grid">
+
                     <div class="service-card">
-                        <h3>Ledger Mastery</h3>
-                        <p>Comprehensive full-cycle management and monthly reconciliation with zero-margin for error.</p>
+                        <h3>Monthly Bookkeeping & Reconciliations</h3>
+                        <p>Stay on top of your finances with accurate, up-to-date monthly bookkeeping. We take care of
+                            recording and categorising all your transactions, ensuring your accounts are reconciled and
+                            reliable every month. Our service includes bank and credit card reconciliations, review of
+                            income and expenses, and identification of discrepancies so nothing is missed. By keeping
+                            your books clean and compliant, we give you clear visibility into your business performance
+                            and cash flow.</p>
+                        <p style="margin-top: 10px;">With our monthly bookkeeping and reconciliations, you can make
+                            informed decisions with confidence, stay ATO-ready, and focus on running and growing your
+                            business—while we handle the numbers.</p>
                     </div>
+
                     <div class="service-card">
-                        <h3>Regulatory Safeguards</h3>
-                        <p>Strategic BAS and GST filing designed to ensure total alignment with current fiscal regulations.</p>
+                        <h3>BAS & GST Preparation</h3>
+                        <p>We simplify your BAS and GST obligations by ensuring your activity statements are prepared
+                            accurately and lodged on time. Our BAS & GST preparation service is designed to keep your
+                            business compliant while maximising efficiency and reducing stress.</p>
+                        <p style="margin-top: 10px;">We review and reconcile your GST, ensuring all figures are correct
+                            and supported by clean bookkeeping. Our team identifies errors early, addresses
+                            discrepancies, and ensures you meet ATO requirements with confidence. With expert oversight
+                            and proactive reminders, you can avoid costly mistakes and penalties—knowing your BAS and
+                            GST reporting is handled accurately and professionally.</p>
                     </div>
+
                     <div class="service-card">
-                        <h3>Executive Insights</h3>
-                        <p>Bespoke financial intelligence and cashflow analysis to empower your next board-level decision.</p>
+                        <h3>Accounts Payable Management
+                        </h3>
+                        <p>Bespoke financial intelligence and cashflow analysis to empower your next board-level
+                            decision.</p>
                     </div>
+
                     <div class="service-card">
-                        <h3>Operational Flow</h3>
-                        <p>Seamless execution of payables and receivables, maintaining the velocity of your business capital.</p>
+                        <h3>Accounts Receivable Management</h3>
+                        <p>Seamless execution of payables and receivables, maintaining the velocity of your business
+                            capital.</p>
+                    </div>
+
+                    <div class="service-card">
+                        <h3>Business advisory services</h3>
+                        <p>Strategic financial guidance to unlock growth, optimize operations, and secure your long-term
+                            competitive advantage.</p>
                     </div>
                 </div>
             </div>
@@ -405,15 +998,18 @@
                 <div class="services-grid">
                     <div class="service-card">
                         <h3>Discretion</h3>
-                        <p>We operate as a silent, seamless extension of your office, upholding the highest standards of data privacy.</p>
+                        <p>We operate as a silent, seamless extension of your office, upholding the highest standards of
+                            data privacy.</p>
                     </div>
                     <div class="service-card">
                         <h3>Efficiency</h3>
-                        <p>Leveraging modern financial tech to deliver rapid turnarounds without compromising on meticulous detail.</p>
+                        <p>Leveraging modern financial tech to deliver rapid turnarounds without compromising on
+                            meticulous detail.</p>
                     </div>
                     <div class="service-card">
                         <h3>Reliability</h3>
-                        <p>Precision is our baseline. Benefit from ironclad financial records you can trust implicitly during any audit.</p>
+                        <p>Precision is our baseline. Benefit from ironclad financial records you can trust implicitly
+                            during any audit.</p>
                     </div>
                 </div>
             </div>
@@ -423,8 +1019,12 @@
             <div class="reveal-content">
                 <div class="contact-card">
                     <div class="contact-info">
-                        <h2 class="cinzel" style="font-size: 2.2rem; margin-bottom: 10px; color: var(--navy);">Reach Out.</h2>
-                        <p style="color: var(--accent); font-weight: 600;">Let’s establish your financial foundation.</p>
+                        <h2 class="cinzel" style="font-size: 2.2rem; margin-bottom: 10px; color: var(--navy);">Reach
+                            Out.</h2>
+                        <p style="color: var(--accent); font-weight: 600;">Let’s establish your financial foundation.
+                        </p>
+                        <p>+61 450 164 745</p>
+                        <p>contactvkdconsultants@gmail.com</p>
                     </div>
                     <form action="#" class="contact-form">
                         <input type="text" placeholder="Full Name" required>
@@ -437,7 +1037,8 @@
         </section>
 
         <footer>
-            <div style="font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--accent); margin-bottom: 15px;">VKD</div>
+            <div style="font-family: 'Cinzel', serif; font-size: 1.2rem; color: var(--accent); margin-bottom: 15px;">VKD
+            </div>
             <p>© 2025 VKD CONSULTANTS. ALL RIGHTS RESERVED.</p>
         </footer>
     </main>
@@ -577,18 +1178,18 @@
                 }
                 animate();
             }
-            
+
             // 4. WHY US: Floating Squares
             if (effectType === 'whyus') {
                 const squares = [];
-                for(let i=0; i<15; i++) squares.push({x: Math.random()*width, y: Math.random()*height, size: Math.random()*40+20, speed: Math.random()*0.5+0.2, angle: Math.random()*6});
+                for (let i = 0; i < 15; i++) squares.push({ x: Math.random() * width, y: Math.random() * height, size: Math.random() * 40 + 20, speed: Math.random() * 0.5 + 0.2, angle: Math.random() * 6 });
                 const animate = () => {
                     ctx.clearRect(0, 0, width, height);
                     squares.forEach(s => {
                         s.y -= s.speed; s.angle += 0.002;
-                        if(s.y < -50) s.y = height + 50;
+                        if (s.y < -50) s.y = height + 50;
                         ctx.save(); ctx.translate(s.x, s.y); ctx.rotate(s.angle);
-                        ctx.strokeStyle = 'rgba(197, 160, 89, 0.1)'; ctx.strokeRect(-s.size/2, -s.size/2, s.size, s.size);
+                        ctx.strokeStyle = 'rgba(197, 160, 89, 0.1)'; ctx.strokeRect(-s.size / 2, -s.size / 2, s.size, s.size);
                         ctx.restore();
                     });
                     requestAnimationFrame(animate);
@@ -636,6 +1237,30 @@
                 document.getElementById(targetId).scrollIntoView({ behavior: 'smooth' });
             });
         });
+        // --- SERVICES CARD INTERACTION ---
+        const serviceCards = document.querySelectorAll('.service-card');
+        serviceCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.stopPropagation();
+
+                // Check if currently active
+                const isActive = card.classList.contains('active');
+
+                // Close ALL cards first (Accordion behavior)
+                // Only do this if we want strict accordion (one open at a time)
+                // The user specifically asked: "when you open another that one closes"
+                serviceCards.forEach(c => c.classList.remove('active'));
+
+                // Integrating strict accordion:
+                // If it wasn't active before, open it now.
+                // If it was active, we just closed it above, so it toggles off.
+                if (!isActive) {
+                    card.classList.add('active');
+                }
+            });
+        });
+
     </script>
 </body>
+
 </html>
